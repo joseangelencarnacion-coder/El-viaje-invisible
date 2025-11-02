@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>El Viaje Invisible - Demo</title>
+<style>
+  :root{--green:#1f8a2e;--bg:#f6f8f6;--card:#ffffff;--muted:#6b6b6b;}
+  body{font-family:Inter, Arial, sans-serif;background:var(--bg);margin:0;padding:20px;display:flex;justify-content:center}
+  .phone{width:360px;border-radius:28px;box-shadow:0 10px 30px rgba(0,0,0,0.12);overflow:hidden;background:#000}
+  header{background:linear-gradient(90deg,var(--green), #2fb86d);color:white;padding:14px 16px}
+  header h1{margin:0;font-size:16px}
+  main{background:var(--card);padding:16px;min-height:520px}
+  .nav{display:flex;gap:8px;margin-bottom:12px}
+  .btn{flex:1;padding:10px;border-radius:8px;background:#f1f1f1;text-align:center;color:#333;font-weight:600;cursor:pointer}
+  .active{background:linear-gradient(90deg,var(--green), #2fb86d);color:#fff}
+  .card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 12px rgba(0,0,0,0.04);margin-bottom:12px}
+  .big{font-size:22px;font-weight:700;color:var(--green)}
+  .muted{color:var(--muted);font-size:13px}
+  .impact{display:flex;gap:10px;justify-content:space-between;align-items:center}
+  .points{background:linear-gradient(90deg,var(--green), #2fb86d);color:#fff;padding:8px 12px;border-radius:10px;font-weight:700}
+  .scan-area{border:2px dashed #e6e6e6;border-radius:12px;padding:18px;text-align:center;cursor:pointer}
+  footer{font-size:12px;color:#777;text-align:center;margin-top:8px}
+  .list{display:flex;flex-direction:column;gap:8px}
+  .list .item{display:flex;justify-content:space-between;padding:8px;border-radius:8px;background:#fafafa}
+  .cta{display:block;margin-top:10px;padding:10px;border-radius:10px;background:var(--green);color:#fff;text-align:center;font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="phone" role="application" aria-label="Demo app">
+    <header>
+      <h1>El Viaje Invisible</h1>
+    </header>
+    <main>
+      <div class="nav" aria-hidden="false">
+        <div id="tab-home" class="btn active" onclick="show('home')">Inicio</div>
+        <div id="tab-scan" class="btn" onclick="show('scan')">Escanear</div>
+        <div id="tab-impact" class="btn" onclick="show('impact')">Impacto</div>
+      </div>
+
+      <section id="home" class="view">
+        <div class="card">
+          <div class="big">Tu impacto hoy</div>
+          <p class="muted">Revisa las últimas acciones y los beneficios del reciclaje.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+            <div>
+              <div style="font-size:18px;font-weight:700">8 envases</div>
+              <div class="muted">reciclados esta semana</div>
+            </div>
+            <div class="points">+120 pts</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="muted">Retos vigentes</div>
+          <div class="list" style="margin-top:8px">
+            <div class="item"><div>Reto del vidrio: Barrio Centro</div><div class="muted">40/50</div></div>
+            <div class="item"><div>Reto del aluminio: Campus U</div><div class="muted">22/40</div></div>
+          </div>
+        </div>
+
+        <a class="cta" href="#" onclick="show('scan');return false">Escanear envase</a>
+      </section>
+
+      <section id="scan" class="view" style="display:none">
+        <div class="card">
+          <div class="big">Escanea tu envase</div>
+          <p class="muted">Cámara simulada en demo. Pulsa "Simular escaneo".</p>
+          <div class="scan-area" onclick="simulateScan()">
+            <div style="font-weight:700;margin-bottom:6px">Zona de escaneo</div>
+            <div class="muted">Botella Heineken - Vidrio verde</div>
+          </div>
+          <button class="cta" style="background:#0b6f24" onclick="simulateScan()">Simular escaneo</button>
+        </div>
+
+        <div id="scan-result" style="display:none" class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:16px;font-weight:700">Botella Heineken</div>
+              <div class="muted">Material: Vidrio • Contenedor: Verde</div>
+            </div>
+            <div class="points" id="points-earned">+15 pts</div>
+          </div>
+          <div style="margin-top:10px" class="muted">
+            Has evitado <strong id="co2">120g CO₂</strong> y <strong id="water">300ml</strong> de agua.
+          </div>
+          <a class="cta" href="#" onclick="show('impact');return false">Ver recorrido</a>
+        </div>
+      </section>
+
+      <section id="impact" class="view" style="display:none">
+        <div class="card">
+          <div class="big">El viaje de tu envase</div>
+          <p class="muted">De contenedor a nueva botella — así se transforma tu gesto.</p>
+          <div style="margin-top:12px">
+            <ol>
+              <li>Depósito en contenedor verde</li>
+              <li>Recogida y traslado a planta de tratamiento</li>
+              <li>Molienda y limpieza</li>
+              <li>Fusión y fabricación de nuevo envase</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="muted">Tu total acumulado</div>
+              <div style="font-weight:700;font-size:18px">+1.200 pts</div>
+            </div>
+            <div>
+              <div class="muted">CO₂ evitado</div>
+              <div style="font-weight:700">180 kg</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>Demo conceptual — personaliza para piloto local • Heineken • Ecovidrio</footer>
+    </main>
+  </div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.view').forEach(v=>v.style.display='none');
+  document.getElementById(id).style.display='block';
+  document.querySelectorAll('.nav .btn').forEach(b=>b.classList.remove('active'));
+  if(id==='home') document.getElementById('tab-home').classList.add('active');
+  if(id==='scan') document.getElementById('tab-scan').classList.add('active');
+  if(id==='impact') document.getElementById('tab-impact').classList.add('active');
+}
+function simulateScan(){
+  document.getElementById('scan-result').style.display='block';
+  // animate points change (simple)
+  let pts = document.getElementById('points-earned');
+  pts.textContent = '+15 pts';
+  // update random-ish values
+  document.getElementById('co2').textContent = (120 + Math.floor(Math.random()*40)) + 'g CO₂';
+  document.getElementById('water').textContent = (250 + Math.floor(Math.random()*150)) + 'ml';
+}
+</script>
+</body>
+</html>
